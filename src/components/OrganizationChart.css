@@ -1,0 +1,367 @@
+.orgChart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .emptyNode {
+    height: 100px;
+    width: 100px;
+  }
+  
+  .node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    /* border: 1px solid #ccc; */
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+  }
+  
+  .profilePic img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .info {
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .personName {
+    font-weight: bold;
+  }
+  
+  .personTitle, .personDepartment {
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .children {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    position: relative;
+  }
+
+  .child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .line {
+    width: 2px;
+    height: 20px;
+    background-color: #ccc;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .child .line::before {
+    content: '';
+    width: 50%;
+    height: 2px;
+    background-color: #ccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .child .line::after {
+    content: '';
+    width: 50%;
+    height: 2px;
+    background-color: #ccc;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+
+
+
+
+
+
+
+
+
+
+.orgChartComplete {
+    background-color: #fbfbfc;
+  }
+  
+  .parentContainer {
+    width: 100%;
+    height: 100vh; /* Full screen height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .chartContainer {
+    width: 100%;
+    height: 800px;
+    min-height: 600px;
+    border: 1px solid black;
+    overflow: auto;
+    text-align: center;
+    font-size: 11px;
+  }
+  
+  .chartContainer > div[class~="orgchart"] {
+    background-image: none !important;
+    background-color: #fbfbfc;
+    padding: 0;
+    width: 100%; /* Ensure it takes up the full width */
+  }
+  
+  .chartContainer > div[class~="orgchart"] td[class~="leftLine"],
+  .chartContainer > div[class~="orgchart"] td[class~="rightLine"],
+  .chartContainer > div[class~="orgchart"] td[class~="topLine"],
+  .chartContainer > div[class~="orgchart"] td[class~="downLine"],
+  .chartContainer > div[class~="orgchart"] tr[class~="verticalNodes"] > td:before,
+  .chartContainer > div[class~="orgchart"] [class~="verticalNodes"] ul > li:before,
+  .chartContainer > div[class~="orgchart"] [class~="verticalNodes"] ul > li:after {
+    border-color: #84b5b5;
+  }
+  
+  .chartContainer > div[class~="orgchart"] > table:first-child {
+    margin: 0;
+  }
+  
+  .chartContainer > div[class~="orgchart"] tr[class~="lines"] div[class~="downLine"] {
+    background-color: black;
+  }
+  
+  .orgchart .node {
+    background: #f4f4f4 !important;
+    border: 1px solid #ccc !important;
+    padding: 10px;
+    min-width: 150px;
+  }
+  
+  /* Adjust vertical line before node */
+  .orgchart .node::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: var(--before-height, 50px); /* Default height */
+    background-color: black;
+    left: 50%;
+    top: -50px; /* Extends upwards */
+    transform: translateX(-50%);
+    transition: height 0.3s ease-in-out;
+  }
+  
+  /* Ensure horizontal and vertical edges align correctly */
+  /*.orgchart .edge {
+    position: absolute !important;
+    transition: transform 0.3s ease-in-out;
+  }*/
+  
+  /* Adjust vertical connecting lines */
+  /*.orgchart .hierarchy::before {
+    top: 50%;
+    transform: translateY(-50%);
+  }*/
+  
+  /* Adjust horizontal connecting lines */
+  /*.orgchart>ul>li>ul li>.node:not(.outsider):before {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }*/
+  
+  /* .chartContainer > div[class~="orgchart"] div[class~="node"] {
+    width: 180px; /* Fixed width for all nodes */
+   /*  height: 80px; /* Fixed height for all nodes */
+    /* min-width: 180px;
+    min-height: 80px;
+  }
+  
+  /*.chartContainer > div[class~="orgchart"] .node:nth-child(odd) {
+    background-color: #f5f5f5; /* Light shade for odd rows */
+  /*}
+  
+  .chartContainer > div[class~="orgchart"] .node:nth-child(even) {
+    background-color: #ffffff; /* Regular white background for even rows */
+  /*}
+  
+  .chartContainer > div[class~="orgchart"] tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Shaded background for odd rows */
+  /*}
+  
+  .chartContainer > div[class~="orgchart"] tr:nth-child(even) {
+    background-color: #ffffff; /* White background for even rows
+  }*/
+  
+  /* Alternate Shading for each tier */
+  /*.chartContainer > div[class~="orgchart"] .tier-1 {
+    background-color: #f5f5f5; /* Light grey for level 1 */
+  /*}
+  
+  .chartContainer > div[class~="orgchart"] .tier-2 {
+    background-color: #ffffff; /* White for level 2 */
+  /*}
+  
+  .chartContainer > div[class~="orgchart"] .tier-3 {
+    background-color: #f9f9f9; /* Slightly darker grey for level 3 */
+  /*}
+  
+  .chartContainer > div[class~="orgchart"] .tier-4 {
+    background-color: #fafafa; /* Even lighter grey for level 4
+  } */
+  
+  /* Update the color of connecting lines (edges) to black */
+  /* If edges are SVG path or line, update the stroke color to black
+  .oci path,
+  .oci line {
+    stroke: black !important;
+  } */
+  
+  /* .orgchart .hierarchy::before{
+    border-top: 2px solid black !important;
+    content: "";
+    position: absolute;
+    top: -11px; /* -(background square size + half width of line) */
+   /*  left: 0;
+    width: 100%;
+    /*border-top: 2px solid rgba(217, 83, 79, 0.8); */
+   /*  box-sizing: border-box;
+  }
+  
+  .orgchart>ul>li>ul li>.node:not(.outsider):before {
+    background-color: black !important;
+  }
+  
+  .orgchart .hierarchy:not(.couple)>.node:has(+.nodes):after {
+    background-color: black !important;
+  }
+  
+  .nodeTemplate {
+    border: 2px solid #aeb2c5;
+    border-radius: 4px;
+    /*background-color: white;*/
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Example CSS for different tiers */
+  /*.node.tier-1 {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  
+  .node.tier-2 {
+    position: relative;
+    top: 50px;
+  
+  }
+  
+  .node.tier-3 {
+    position: relative;
+    top: 150px;
+  
+  }
+  
+  .node.tier-4 {
+    position: relative;
+    top: 200px;
+  
+  }
+  
+  .node.tier-5 {
+    position: relative;
+    top: 250px;
+  
+  } */
+  
+  /* Background color based on tier 
+  .chartContainer > div[class~="orgchart"] .tier-1 {
+    /*background-color: #f5f5f5 !important;  /* Light grey */
+  /*   background-color: #66B3B3 !important; 
+  }
+  
+  .chartContainer > div[class~="orgchart"] .tier-2 {
+    /*background-color: #f5f5f5 !important;  /* Light grey */
+   /*  background-color: #80C9C9 !important; 
+  }
+  
+  .chartContainer > div[class~="orgchart"] .tier-3 {
+    /*background-color: #e8f7ff !important;  /* Light blue */
+   /*  background-color: #99D9D9 !important; 
+  }
+  
+  .chartContainer > div[class~="orgchart"] .tier-4 {
+    /*background-color: #fff4e6 !important;  /* Light orange */
+   /*  background-color: #B3E0E0 !important;
+  }
+  
+  .chartContainer > div[class~="orgchart"] .tier-5 {
+    /*background-color: #f9f9f9 !important;  /* Slightly darker grey */
+   /*  background-color: #CCE6E6 !important;
+  } */
+  
+  .profilePic {
+    flex: 0 0 50px;
+    height: 50px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profilePic img {
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    overflow: hidden; /* Prevents text from overflowing */
+  }
+  
+  .personName {
+    font-weight: bold;
+    font-size: 12px;
+    color: #333;
+    margin-bottom: 5px;
+    white-space: nowrap; /* Prevent wrapping */
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+  .personTitle {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  
+  .personTitle:last-child {
+    color: #777;
+  }
+
+
