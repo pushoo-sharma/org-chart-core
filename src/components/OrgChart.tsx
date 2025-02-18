@@ -41,6 +41,9 @@ const renderNode = (employee: IEmployee, tier: number = 0) => {
         <div className="personTitle">{employee.JobTitle}</div>
         <div className="personDepartment">{employee.Department}</div>
       </div>
+      {
+        employee.children && employee.children.length > 0 && <div className='horizontal-line' />
+      }
       {employee.children && employee.children.length > 0 && (
         <div className="children">
           {employee.children.map(child => (

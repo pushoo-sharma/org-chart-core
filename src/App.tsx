@@ -70,7 +70,7 @@ const sampleData: any = {
           SupervisorO365Email: "jane.smith@company.com",
           FirstName: "Bob",
           LastName: "Brown",
-          Tier: 3,
+          Tier: 4,
           children: []
         }
       ]
